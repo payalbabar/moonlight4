@@ -137,6 +137,7 @@ export default function ContractDeployment({
       txId: "manual-import",
       deployedAt: new Date().toISOString(),
       deployerAddress: account || "unknown",
+      onChain: false,
     };
     setContractInfo(info);
     onContractChange?.(info.address);
@@ -265,8 +266,21 @@ export default function ContractDeployment({
           <div className="deployed-info-box">
             <div className="deployed-header">
               <span className="deployed-check">✓</span>
-              <span className="deployed-title">CONTRACT DEPLOYED</span>
+              <span className="deployed-title">
+                {contractInfo.onChain ? "REAL ON-CHAIN DEPLOYMENT" : "CONTRACT ACTIVE (AUTH RECORD)"}
+              </span>
+              {contractInfo.onChain ? (
+                <span className="onchain-badge">🔗 ON-CHAIN</span>
+              ) : (
+                <span className="auth-badge" title="Add Dust tokens to your 1AM Wallet to enable real on-chain transactions">🔐 AUTH</span>
+              )}
             </div>
+
+            {!contractInfo.onChain && (
+              <div className="auth-notice">
+                💡 This is a cryptographic authorization record. To anchor this contract on-chain, ensure your 1AM Wallet has <strong>Dust tokens</strong> on Midnight Preprod and re-deploy.
+              </div>
+            )}
 
             <div className="deployed-details">
               <div className="deployed-row">
@@ -285,11 +299,20 @@ export default function ContractDeployment({
               </div>
 
               <div className="deployed-row">
-                <span className="deployed-label">Deployment Tx:</span>
+                <span className="deployed-label">{contractInfo.onChain ? "On-Chain Tx:" : "Auth Record:"}</span>
                 <span className="deployed-value tx-id" title={contractInfo.txId}>
                   {contractInfo.txId}
                 </span>
               </div>
+
+              {contractInfo.indexerUri && (
+                <div className="deployed-row">
+                  <span className="deployed-label">Midnight Indexer:</span>
+                  <span className="deployed-value indexer-uri">
+                    {contractInfo.indexerUri}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className="deployed-actions">

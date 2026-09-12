@@ -1809,11 +1809,50 @@ body::after {
   font-size: 0.75rem;
 }
 
-.contract-addr, .tx-id {
+.contract-addr, .tx-id, .indexer-uri {
   color: var(--color-cyber-cyan);
   font-family: "JetBrains Mono", monospace;
   font-weight: 600;
   word-break: break-all;
+}
+
+.onchain-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  background: rgba(57, 255, 20, 0.15);
+  border: 1px solid rgba(57, 255, 20, 0.5);
+  border-radius: 999px;
+  color: #39ff14;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-left: auto;
+}
+
+.auth-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  background: rgba(255, 165, 0, 0.15);
+  border: 1px solid rgba(255, 165, 0, 0.5);
+  border-radius: 999px;
+  color: #ffa500;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-left: auto;
+  cursor: help;
+}
+
+.auth-notice {
+  background: rgba(255, 165, 0, 0.08);
+  border: 1px solid rgba(255, 165, 0, 0.25);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.78rem;
+  color: rgba(255, 165, 0, 0.85);
+  line-height: 1.5;
 }
 
 .btn-copy-contract {
@@ -1830,6 +1869,7 @@ body::after {
 .btn-copy-contract:hover {
   background: rgba(0, 229, 255, 0.25);
 }
+
 
 .btn-link-reset {
   background: none;
