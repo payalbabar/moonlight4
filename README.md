@@ -19,9 +19,26 @@ StegoVault allows users to encrypt confidential credentials (seed phrases, priva
 | **Verified Contract Address** | `0200578f0943ded482a2eb5b575717ab4e88f43c5335bac10f87a28d51536b7d63c4` |
 | **GitHub Repository** | [https://github.com/payalbabar/moonlight4](https://github.com/payalbabar/moonlight4) |
 | **Live Preprod Demo** | [https://stegovault.vercel.app](https://stegovault.vercel.app) *(or your deployed Vercel/Netlify URL)* |
-| **Product X (Twitter) Profile** | [@StegoVaultApp](https://x.com/StegoVaultApp) *(or your product X handle)* |
+| **Product X (Twitter) Profile** | [@StegoVaultWeb3](https://x.com/StegoVaultWeb3) |
 | **User Guide (Step-by-Step)** | [docs/USAGE.md](docs/USAGE.md) |
 | **Demo Script for Reviewers** | [docs/demo.md](docs/demo.md) |
+
+---
+
+## ✅ Level 4 Submission Checklist
+
+| Requirement | Status | Proof |
+| :--- | :---: | :--- |
+| **Working MVP live on Preprod** | ✅ | [stegovault.vercel.app](https://stegovault.vercel.app) |
+| **Contract Address** | ✅ | `0200578f0943ded482a2eb5b575717ab4e88f43c5335bac10f87a28d51536b7d63c4` |
+| **README Documentation** | ✅ | This file |
+| **Setup Guide** | ✅ | [docs/deployment.md](docs/deployment.md) |
+| **Usage Guide** | ✅ | [docs/USAGE.md](docs/USAGE.md) |
+| **CI/CD Pipeline** | ✅ | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) · [![CI](https://github.com/payalbabar/moonlight4/actions/workflows/ci.yml/badge.svg)](https://github.com/payalbabar/moonlight4/actions) |
+| **Product X Profile** | ✅ | [@StegoVaultWeb3](https://x.com/StegoVaultWeb3) |
+| **Launch Announcement Post** | ✅ | [View Post on X](https://x.com/StegoVaultWeb3/status/2098807487545942205?s=20) |
+| **Demo Video** | ✅ | [Linked in X post](https://x.com/StegoVaultWeb3/status/2098807487545942205?s=20) |
+| **Minimum 15 Commits** | ✅ | 21 meaningful commits |
 
 ---
 

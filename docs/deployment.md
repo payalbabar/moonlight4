@@ -17,7 +17,7 @@ This guide covers local environment setup, Compact smart contract compilation, 1
 
 ```bash
 # 1. Clone repository
-git clone https://github.com/YOUR_GITHUB_USERNAME/stegovault.git
+git clone https://github.com/payalbabar/moonlight4.git
 cd stegovault
 
 # 2. Install dependencies
