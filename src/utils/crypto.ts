@@ -15,8 +15,7 @@
 // Helpers
 // ──────────────────────────────────────────────
 
-function arrayBufferToBase64(buffer: ArrayBuffer): string {
-  const bytes = new Uint8Array(buffer);
+function bytesToBase64(bytes: Uint8Array): string {
   let binary = "";
   for (let i = 0; i < bytes.byteLength; i++) {
     binary += String.fromCharCode(bytes[i]);
@@ -24,13 +23,13 @@ function arrayBufferToBase64(buffer: ArrayBuffer): string {
   return btoa(binary);
 }
 
-function base64ToArrayBuffer(base64: string): ArrayBuffer {
+function base64ToBytes(base64: string): Uint8Array {
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
   for (let i = 0; i < binary.length; i++) {
     bytes[i] = binary.charCodeAt(i);
   }
-  return bytes.buffer;
+  return bytes;
 }
 
 // ──────────────────────────────────────────────
@@ -111,7 +110,7 @@ export async function encryptData(
   onLog?.("[CRYPTO] AES-256-GCM encryption…");
   const encoded = new TextEncoder().encode(plaintext);
   const cipherBuffer = await crypto.subtle.encrypt(
-    { name: "AES-GCM", iv },
+    { name: "AES-GCM", iv: iv as BufferSource },
     key,
     encoded
   );
@@ -119,9 +118,9 @@ export async function encryptData(
   onLog?.("[CRYPTO] Encryption complete ✓");
 
   return {
-    ciphertext: arrayBufferToBase64(cipherBuffer),
-    iv: arrayBufferToBase64(iv.buffer.slice(0)),
-    salt: arrayBufferToBase64(salt.buffer.slice(0)),
+    ciphertext: bytesToBase64(new Uint8Array(cipherBuffer)),
+    iv: bytesToBase64(iv),
+    salt: bytesToBase64(salt),
   };
 }
 
@@ -135,9 +134,9 @@ export async function decryptData(
   onLog?: (msg: string) => void
 ): Promise<string> {
   onLog?.("[CRYPTO] Extracting salt and IV from payload…");
-  const salt = new Uint8Array(base64ToArrayBuffer(payload.salt));
-  const iv = new Uint8Array(base64ToArrayBuffer(payload.iv));
-  const ciphertext = base64ToArrayBuffer(payload.ciphertext);
+  const salt = base64ToBytes(payload.salt);
+  const iv = base64ToBytes(payload.iv);
+  const ciphertext = base64ToBytes(payload.ciphertext);
 
   onLog?.("[CRYPTO] PBKDF2 key derivation from password…");
   const key = await deriveKey(password, salt);
@@ -145,9 +144,9 @@ export async function decryptData(
   onLog?.("[CRYPTO] AES-256-GCM decryption…");
   try {
     const decrypted = await crypto.subtle.decrypt(
-      { name: "AES-GCM", iv },
+      { name: "AES-GCM", iv: iv as BufferSource },
       key,
-      ciphertext
+      ciphertext as BufferSource
     );
     onLog?.("[CRYPTO] Decryption complete ✓");
     return new TextDecoder().decode(decrypted);
