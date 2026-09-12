@@ -1,0 +1,13 @@
+pragma language_version >= 0.17.0;
+
+import CompactStandardLibrary;
+
+// Ledger state mapping a 32-byte vault identifier to a 32-byte non-sensitive content commitment hash
+export ledger vault_commitments: Map<Bytes<32>, Bytes<32>>;
+
+// Circuit for recording a non-sensitive vault commitment on-chain.
+// Neither the secret, password, AES key, nor image payload is ever processed or stored on-chain.
+export circuit record_vault(vault_id: Bytes<32>, content_hash: Bytes<32>): [] {
+    // Explicit disclosure required by Compact compiler when private witness values are written to the public ledger
+    vault_commitments.insert(disclose(vault_id), disclose(content_hash));
+}

@@ -1,0 +1,207 @@
+/* ═══════════════════════════════════════════════
+   1AM WALLET — Cyberpunk Component Styles
+   ═══════════════════════════════════════════════ */
+
+.wallet-container {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.wallet-card {
+  background: var(--color-cyber-surface, #111827);
+  border: 1px solid var(--color-cyber-border, #1e3a5f);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.wallet-card:hover {
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 4px 25px rgba(0, 229, 255, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.wallet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(30, 58, 95, 0.6);
+  margin-bottom: 1rem;
+}
+
+.wallet-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wallet-icon {
+  font-size: 1.2rem;
+  color: var(--color-cyber-yellow, #ffe600);
+  filter: drop-shadow(0 0 8px rgba(255, 230, 0, 0.5));
+}
+
+.wallet-title {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-cyber-cyan, #00e5ff);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.wallet-badge-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-connected {
+  background: var(--color-cyber-green, #39ff14);
+  box-shadow: 0 0 10px var(--color-cyber-green, #39ff14);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+
+.status-disconnected {
+  background: var(--color-cyber-pink, #ff2d7b);
+  box-shadow: 0 0 8px rgba(255, 45, 123, 0.6);
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+.status-text {
+  color: var(--color-cyber-text-dim, #94a3b8);
+}
+
+.wallet-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.wallet-desc {
+  font-size: 0.9rem;
+  color: var(--color-cyber-text-dim, #94a3b8);
+}
+
+.wallet-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.wallet-details {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.wallet-field {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.field-label {
+  color: var(--color-cyber-text-dim, #94a3b8);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+}
+
+.field-value {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 600;
+  color: var(--color-cyber-text, #e0e7ff);
+}
+
+.account-address {
+  color: var(--color-cyber-cyan, #00e5ff);
+  background: rgba(0, 229, 255, 0.08);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.chain-badge {
+  color: var(--color-cyber-yellow, #ffe600);
+  background: rgba(255, 230, 0, 0.08);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 230, 0, 0.2);
+}
+
+.btn-copy-address {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(0, 229, 255, 0.1);
+  color: var(--color-cyber-cyan, #00e5ff);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: 0.3rem;
+}
+
+.btn-copy-address:hover {
+  background: rgba(0, 229, 255, 0.25);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+.connect-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #00e5ff 0%, #0077ff 100%);
+  color: #0a0e17;
+  border: none;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.connect-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 0 25px rgba(0, 229, 255, 0.7);
+}
+
+.disconnect-btn {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  background: transparent;
+  color: #ff2d7b;
+  border: 1px solid rgba(255, 45, 123, 0.4);
+  transition: all 0.2s ease;
+}
+
+.disconnect-btn:hover {
+  background: rgba(255, 45, 123, 0.15);
+  border-color: #ff2d7b;
+  box-shadow: 0 0 10px rgba(255, 45, 123, 0.3);
+}

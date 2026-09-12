@@ -1,0 +1,33 @@
+{
+  "circuits": [
+    {
+      "name": "record_vault",
+      "pure": false,
+      "arguments": [
+        {
+          "name": "vault_id",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        },
+        {
+          "name": "content_hash",
+          "type": {
+            "type-name": "Bytes",
+            "length": 32
+          }
+        }
+      ],
+      "result-type": {
+        "type-name": "Tuple",
+        "types": [
+        ]
+      }
+    }
+  ],
+  "witnesses": [
+  ],
+  "contracts": [
+  ]
+}
