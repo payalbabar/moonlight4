@@ -1,6 +1,6 @@
 # 🔐 StegoVault
 
-[![CI](https://github.com/payalbabar/level4/actions/workflows/ci.yml/badge.svg)](https://github.com/payalbabar/level4/actions)
+[![CI](https://github.com/payalbabar/moonlight4/actions/workflows/ci.yml/badge.svg)](https://github.com/payalbabar/moonlight4/actions)
 [![Midnight Preprod](https://img.shields.io/badge/Midnight-Preprod-blue?logo=data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9IiNmZmYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTEyIDJMMiA3bDEwIDUgMTAtNS0xMC01ek0yIDE3bDEwIDUgMTAtNS0xMC01LTEwIDV6TTIgMTJsMTAgNSAxMC01LTEwLTUtMTAgNXoiLz48L3N2Zz4=)](https://midnight.network)
 [![1AM Wallet](https://img.shields.io/badge/Wallet-1AM%20Wallet-purple)](https://1am.xyz)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -17,7 +17,7 @@ StegoVault allows users to encrypt confidential credentials (seed phrases, priva
 | :--- | :--- |
 | **Midnight Network** | `Midnight Preprod` |
 | **Verified Contract Address** | `0200578f0943ded482a2eb5b575717ab4e88f43c5335bac10f87a28d51536b7d63c4` |
-| **GitHub Repository** | [https://github.com/payalbabar/level4](https://github.com/payalbabar/level4) |
+| **GitHub Repository** | [https://github.com/payalbabar/moonlight4](https://github.com/payalbabar/moonlight4) |
 | **Live Preprod Demo** | [https://stegovault.vercel.app](https://stegovault.vercel.app) *(or your deployed Vercel/Netlify URL)* |
 | **Product X (Twitter) Profile** | [@StegoVaultApp](https://x.com/StegoVaultApp) *(or your product X handle)* |
 | **User Guide (Step-by-Step)** | [docs/USAGE.md](docs/USAGE.md) |
@@ -114,8 +114,8 @@ StegoVault is architected on a zero-trust, client-side privacy model:
 ### 2. Installation & Run
 ```bash
 # Clone the repository
-git clone https://github.com/payalbabar/level4.git
-cd level4
+git clone https://github.com/payalbabar/moonlight4.git
+cd moonlight4
 
 # Install dependencies
 npm install
