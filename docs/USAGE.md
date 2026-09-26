@@ -15,7 +15,7 @@ StegoVault is a privacy-preserving cold storage Web3 application that allows you
 ## 2. Step-by-Step Guide
 
 ### Phase A: Connecting & Verifying the Smart Contract
-1. Open the StegoVault application at `http://localhost:5173`.
+1. Open the StegoVault application at `https://moonlight4-dw3y.vercel.app/` (or `http://localhost:5173` locally).
 2. Click **⚡ CONNECT 1AM WALLET** and approve the connection in your 1AM Wallet.
 3. In the **STEGOVAULT CONTRACT** panel:
    - If `VITE_CONTRACT_ADDRESS` is set in your environment, the contract will be shown as already active.

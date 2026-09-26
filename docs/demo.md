@@ -11,7 +11,7 @@ Follow this step-by-step walkthrough to test and evaluate StegoVault end-to-end.
 ---
 
 ## Step 1: Open the Application & Connect 1AM Wallet
-1. Navigate to `http://localhost:5173`.
+1. Navigate to `https://moonlight4-dw3y.vercel.app/` (or `http://localhost:5173` locally).
 2. Inspect the Landing Page: three security layers, architecture explanation, and Midnight Network badges.
 3. Click **⚡ CONNECT 1AM WALLET** (or **LAUNCH STEGOVAULT** &rarr; go to `/app`).
 4. Approve the connection in 1AM Wallet.
