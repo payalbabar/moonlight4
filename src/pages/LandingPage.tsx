@@ -1,313 +1,389 @@
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { use1AMWallet } from "../hooks/use1AMWallet";
+import LockIcon from "../components/LockIcon";
 
 export default function LandingPage() {
     const navigate = useNavigate();
     const { isConnected, account, isConnecting, connect, disconnect } = use1AMWallet();
+    const heroRef = useRef<HTMLDivElement>(null);
 
-    const handleLaunch = () => {
-        navigate("/app");
-    };
+    useEffect(() => {
+        const el = heroRef.current;
+        if (!el) return;
+        const t = setTimeout(() => el.classList.add("fade-in"), 60);
+        return () => clearTimeout(t);
+    }, []);
 
     const handleConnect = async () => {
-        try {
-            await connect();
-        } catch {
-            // error handled in context
-        }
+        try { await connect(); } catch { /* handled in context */ }
     };
+
+    const handleLaunch = () => navigate("/app");
 
     return (
         <div className="landing-page">
-            {/* Hero Section */}
-            <section className="hero-section">
-                <div className="hero-content fade-in">
-                    <div className="hero-icon-wrapper">
-                        <svg viewBox="0 0 100 100" className="hero-lock-icon">
-                            <rect x="10" y="30" width="80" height="60" rx="8" className="lock-body" />
-                            <circle cx="50" cy="55" r="10" className="lock-keyhole" />
-                            <path d="M30 30V20a20 20 0 0 1 40 0v10" className="lock-shackle" />
-                            <circle cx="50" cy="50" r="45" className="glow-circle" />
-                        </svg>
-                    </div>
 
-                    <h1 className="hero-title">
-                        <span className="gradient-text">STEGOVAULT</span>
-                    </h1>
-
-                    <p className="hero-subtitle">
-                        1AM Wallet · Midnight Network · AES-256-GCM · LSB Steganography
-                    </p>
-
-                    <p className="hero-description">
-                        Hide seed phrases and sensitive credentials inside ordinary images using <strong>AES-256-GCM authenticated encryption</strong>,{" "}
-                        <strong>LSB steganography</strong>, and <strong>1AM Wallet on-chain commitments</strong>.
-                        StegoVault processes your secret 100% locally in browser memory.
-                    </p>
-
-                    <div className="hero-badges">
-                        <span className="badge-item">
-                            <span className="badge-icon">⚡</span> 1AM Wallet
+            {/* ── Nav ── */}
+            <nav className="landing-nav" role="navigation" aria-label="Main navigation">
+                <div className="landing-nav-inner">
+                    <a href="/" className="nav-logo" aria-label="StegoVault home">
+                        <span className="nav-logo-icon"><LockIcon /></span>
+                        StegoVault
+                    </a>
+                    <div className="nav-actions">
+                        <span className="nav-network-pill">
+                            <span className="nav-dot" aria-hidden="true" />
+                            Midnight Preprod
                         </span>
-                        <span className="badge-item">
-                            <span className="badge-icon">📜</span> Compact Contract
-                        </span>
-                        <span className="badge-item">
-                            <span className="badge-icon">🔐</span> AES-256-GCM
-                        </span>
-                        <span className="badge-item">
-                            <span className="badge-icon">🖼️</span> LSB Steganography
-                        </span>
-                        <span className="badge-item">
-                            <span className="badge-icon">💻</span> 100% Client-Side
-                        </span>
-                    </div>
-
-                    {/* 1AM Wallet connect panel on landing page */}
-                    <div className="landing-wallet-panel">
-                        {!isConnected ? (
-                            <button
-                                className="cta-button landing-wallet-btn"
-                                onClick={handleConnect}
-                                disabled={isConnecting}
-                            >
-                                {isConnecting ? (
-                                    <span className="btn-loading">
-                                        <span className="spinner" /> Connecting…
-                                    </span>
-                                ) : (
-                                    <>
-                                        <span className="wallet-btn-icon">⚡</span>
-                                        <span className="cta-text">CONNECT 1AM WALLET</span>
-                                    </>
-                                )}
+                        {isConnected ? (
+                            <button className="btn-launch" onClick={handleLaunch}>
+                                Open App →
                             </button>
                         ) : (
-                            <div className="landing-wallet-connected">
-                                <div className="landing-connected-info">
-                                    <span className="landing-status-dot" />
-                                    <span className="landing-connected-label">1AM Wallet Connected</span>
-                                    <span className="landing-address">
-                                        {account?.slice(0, 8)}...{account?.slice(-6)}
-                                    </span>
+                            <button
+                                className="connect-btn"
+                                style={{ padding: "0.38rem 1rem", fontSize: "0.78rem" }}
+                                onClick={handleConnect}
+                                disabled={isConnecting}
+                                aria-label="Connect 1AM Wallet"
+                            >
+                                {isConnecting
+                                    ? <><span className="spinner" /> Connecting…</>
+                                    : "Connect Wallet"
+                                }
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </nav>
+
+            {/* ── Hero ── */}
+            <section className="hero-section" aria-labelledby="hero-heading">
+                {/* Animated bg blobs */}
+                <div className="orb orb-1" aria-hidden="true" />
+                <div className="orb orb-2" aria-hidden="true" />
+                <div className="orb orb-3" aria-hidden="true" />
+                <div className="hero-grid-overlay" aria-hidden="true" />
+
+                <div className="hero-content" ref={heroRef}>
+
+                    {/* Eyebrow */}
+                    <span className="hero-eyebrow">
+                        <span className="nav-dot" style={{ width: 6, height: 6 }} aria-hidden="true" />
+                        Live on Midnight Preprod · 1AM Wallet
+                    </span>
+
+                    {/* Headline */}
+                    <h1 className="hero-title" id="hero-heading">
+                        Hide your secrets{" "}
+                        <span className="hero-title-accent">inside ordinary images</span>
+                    </h1>
+
+                    {/* Sub */}
+                    <p className="hero-description">
+                        StegoVault encrypts seed phrases and private keys with <strong>AES-256-GCM</strong>,
+                        binds each vault to your <strong>1AM Wallet identity on-chain</strong>, then conceals
+                        the encrypted payload inside a PNG image using <strong>lossless LSB steganography</strong> — 100% in your browser.
+                    </p>
+
+                    {/* Tech badges */}
+                    <div className="hero-tech-row" role="list" aria-label="Technology stack">
+                        {[
+                            { icon: "⚡", label: "1AM Wallet" },
+                            { icon: "📜", label: "Compact Contract" },
+                            { icon: "🔐", label: "AES-256-GCM" },
+                            { icon: "🖼️", label: "LSB Steganography" },
+                            { icon: "🌐", label: "100% Client-Side" },
+                        ].map(({ icon, label }) => (
+                            <span className="tech-badge" key={label} role="listitem">
+                                <span className="tech-badge-icon" aria-hidden="true">{icon}</span>
+                                {label}
+                            </span>
+                        ))}
+                    </div>
+
+                    {/* CTA */}
+                    <div className="hero-cta-group">
+                        <div className="hero-wallet-area">
+                            {isConnected ? (
+                                <div className="connected-wallet-card">
+                                    <div className="connected-wallet-info">
+                                        <span className="connected-dot" aria-hidden="true" />
+                                        <span className="connected-label">Connected</span>
+                                        <span className="connected-address" title={account ?? ""}>
+                                            {account?.slice(0, 8)}…{account?.slice(-6)}
+                                        </span>
+                                    </div>
+                                    <div className="connected-actions">
+                                        <button className="btn-launch" onClick={handleLaunch}>
+                                            Launch App →
+                                        </button>
+                                        <button className="btn-disconnect-small" onClick={disconnect}>
+                                            Disconnect
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="landing-wallet-actions">
-                                    <button className="cta-button" onClick={handleLaunch}>
-                                        <span className="cta-text">LAUNCH STEGOVAULT</span>
-                                        <span className="cta-arrow">→</span>
-                                    </button>
-                                    <button className="landing-disconnect-btn" onClick={disconnect}>
-                                        Disconnect
-                                    </button>
+                            ) : (
+                                <button
+                                    className="cta-primary"
+                                    onClick={handleConnect}
+                                    disabled={isConnecting}
+                                    aria-label="Connect 1AM Wallet to get started"
+                                >
+                                    {isConnecting
+                                        ? <><span className="spinner" /> Connecting to 1AM Wallet…</>
+                                        : <><span aria-hidden="true">⚡</span> Connect 1AM Wallet</>
+                                    }
+                                </button>
+                            )}
+                        </div>
+                        <p className="cta-note">
+                            Requires the <strong>1AM Wallet</strong> browser extension on Midnight Preprod.
+                            No signups. No trackers.
+                        </p>
+                    </div>
+
+                    {/* Stats bar */}
+                    <div className="hero-stats">
+                        {[
+                            { value: "AES-256", label: "Encryption standard" },
+                            { value: "100k",    label: "PBKDF2 iterations" },
+                            { value: "0 bytes", label: "Data sent to servers" },
+                            { value: "100%",    label: "Client-side processing" },
+                        ].map(({ value, label }) => (
+                            <div className="hero-stat" key={label}>
+                                <span className="hero-stat-value">{value}</span>
+                                <div className="hero-stat-label">{label}</div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Visual product mockup */}
+                    <div className="hero-mockup" aria-hidden="true">
+                        <div className="mockup-bar">
+                            <div className="mockup-dots">
+                                <div className="mockup-dot mockup-dot-r" />
+                                <div className="mockup-dot mockup-dot-y" />
+                                <div className="mockup-dot mockup-dot-g" />
+                            </div>
+                            <div className="mockup-url">stegovault.app · Midnight Preprod</div>
+                        </div>
+                        <div className="mockup-body">
+                            <div className="mockup-panel-row">
+                                <div className="mockup-panel mockup-vault">
+                                    <div className="mockup-panel-head">
+                                        <span className="mockup-panel-icon">🔒</span>
+                                        <span className="mockup-panel-title">THE VAULT</span>
+                                    </div>
+                                    <div className="mockup-line" />
+                                    <div className="mockup-line mockup-line-short" />
+                                    <div className="mockup-line" />
+                                    <div className="mockup-btn" />
+                                </div>
+                                <div className="mockup-panel mockup-key">
+                                    <div className="mockup-panel-head">
+                                        <span className="mockup-panel-icon">🔓</span>
+                                        <span className="mockup-panel-title">THE KEY</span>
+                                    </div>
+                                    <div className="mockup-line" />
+                                    <div className="mockup-line mockup-line-short" />
+                                    <div className="mockup-line" />
+                                    <div className="mockup-btn mockup-btn-purple" />
                                 </div>
                             </div>
-                        )}
-                        {!isConnected && (
-                            <p className="landing-wallet-note">
-                                Exclusively designed for <strong>1AM Wallet</strong> on Midnight Preprod.
-                                Connect 1AM Wallet to authorize and seal steganographic vaults.
-                            </p>
-                        )}
+                            <div className="mockup-terminal">
+                                {[
+                                    { color: "var(--green)",  w: "75%" },
+                                    { color: "var(--blue)",   w: "55%" },
+                                    { color: "var(--amber)",  w: "65%" },
+                                    { color: "var(--green)",  w: "80%" },
+                                ].map(({ color, w }, i) => (
+                                    <div className="mockup-log-line" key={i}>
+                                        <div className="mockup-log-dot" style={{ background: color }} />
+                                        <div className="mockup-log-text" style={{ width: w, maxWidth: w }} />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            {/* How It Works */}
-            <section className="how-it-works">
-                <h2 className="section-title">
-                    <span className="title-line"></span>
-                    HOW IT WORKS
-                    <span className="title-line"></span>
-                </h2>
+            {/* ── How It Works ── */}
+            <section className="how-section" aria-labelledby="how-heading">
+                <div className="section-inner">
+                    <p className="section-label">
+                        <span className="section-label-line" aria-hidden="true" />
+                        HOW IT WORKS
+                        <span className="section-label-line-r" aria-hidden="true" />
+                    </p>
+                    <h2 className="section-title" id="how-heading">
+                        Four steps to unbreakable cold storage
+                    </h2>
+                    <p className="section-subtitle">
+                        From wallet connection to a steganographic vault — every step happens locally in your browser.
+                    </p>
 
-                <div className="steps-grid">
-                    <div className="step-card" style={{ animationDelay: "0.1s" }}>
-                        <div className="step-number">01</div>
-                        <div className="step-icon">⚡</div>
-                        <h3 className="step-title">Connect 1AM Wallet</h3>
-                        <p className="step-description">
-                            Connect your <strong>1AM Wallet</strong> to authenticate your Midnight identity.
-                            Every vault is cryptographically bound to your wallet.
-                        </p>
-                    </div>
-
-                    <div className="step-card" style={{ animationDelay: "0.2s" }}>
-                        <div className="step-number">02</div>
-                        <div className="step-icon">🔒</div>
-                        <h3 className="step-title">Encrypt &amp; Commit</h3>
-                        <p className="step-description">
-                            Your secret is encrypted locally with <strong>PBKDF2</strong> (100k iterations) and <strong>AES-256-GCM</strong>.
-                            A non-sensitive commitment is recorded on the <strong>Compact smart contract</strong>.
-                        </p>
-                    </div>
-
-                    <div className="step-card" style={{ animationDelay: "0.3s" }}>
-                        <div className="step-number">03</div>
-                        <div className="step-icon">🎨</div>
-                        <h3 className="step-title">Hide in Plain Sight</h3>
-                        <p className="step-description">
-                            The encrypted payload is embedded into the <strong>blue channel LSB</strong> of
-                            a lossless PNG image—completely imperceptible to the human eye.
-                        </p>
-                    </div>
-
-                    <div className="step-card" style={{ animationDelay: "0.4s" }}>
-                        <div className="step-number">04</div>
-                        <div className="step-icon">🔓</div>
-                        <h3 className="step-title">Verify &amp; Recover</h3>
-                        <p className="step-description">
-                            Connect the authorized 1AM Wallet, verify the on-chain commitment, enter your password, and
-                            recover your secret in browser memory.
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            {/* Security Architecture */}
-            <section className="features-section">
-                <h2 className="section-title">
-                    <span className="title-line"></span>
-                    THREE SECURITY LAYERS
-                    <span className="title-line"></span>
-                </h2>
-
-                <div className="features-grid three-layers-grid">
-                    <div className="feature-card layer-card layer-wallet">
-                        <div className="layer-badge">LAYER 1</div>
-                        <div className="feature-icon">⚡</div>
-                        <h3 className="feature-title">Midnight &amp; 1AM Wallet</h3>
-                        <p className="feature-text">
-                            Zero-knowledge authorization and on-chain commitment binding via Compact smart contract.
-                            No other wallet is supported.
-                        </p>
-                    </div>
-
-                    <div className="feature-card layer-card layer-crypto">
-                        <div className="layer-badge">LAYER 2</div>
-                        <div className="feature-icon">🛡️</div>
-                        <h3 className="feature-title">AES-256-GCM Encryption</h3>
-                        <p className="feature-text">
-                            PBKDF2 + AES-256-GCM authenticated encryption.
-                            Your password and AES key never leave browser memory.
-                        </p>
-                    </div>
-
-                    <div className="feature-card layer-card layer-stego">
-                        <div className="layer-badge">LAYER 3</div>
-                        <div className="feature-icon">👁️</div>
-                        <h3 className="feature-title">PNG + LSB Steganography</h3>
-                        <p className="feature-text">
-                            The encrypted ciphertext is embedded in blue-channel pixel bits.
-                            The vault appears as an ordinary photo for plausible deniability.
-                        </p>
-                    </div>
-                </div>
-
-                <div className="security-note">
-                    <span className="security-note-icon">ℹ️</span>
-                    StegoVault processes your secret locally in your browser and never sends sensitive data on-chain or to any server.
-                    The Midnight Network stores only non-sensitive cryptographic commitments.
-                </div>
-            </section>
-
-            {/* Features */}
-            <section className="features-section features-section-secondary">
-                <h2 className="section-title">
-                    <span className="title-line"></span>
-                    WHY STEGOVAULT?
-                    <span className="title-line"></span>
-                </h2>
-
-                <div className="features-grid">
-                    <div className="feature-card">
-                        <div className="feature-icon">⚡</div>
-                        <h3 className="feature-title">Zero Server Dependency</h3>
-                        <p className="feature-text">
-                            Everything runs locally in your browser using the native Web Crypto API.
-                        </p>
-                    </div>
-
-                    <div className="feature-card">
-                        <div className="feature-icon">🔗</div>
-                        <h3 className="feature-title">Wallet-Bound Vaults</h3>
-                        <p className="feature-text">
-                            Each vault is cryptographically bound to your 1AM Wallet address on Midnight Preprod.
-                        </p>
-                    </div>
-
-                    <div className="feature-card">
-                        <div className="feature-icon">📱</div>
-                        <h3 className="feature-title">Cross-Platform Responsive</h3>
-                        <p className="feature-text">
-                            Engineered for high usability across desktop, laptop, tablet, and mobile devices.
-                        </p>
-                    </div>
-
-                    <div className="feature-card">
-                        <div className="feature-icon">⚠️</div>
-                        <h3 className="feature-title">Lossless PNG Protection</h3>
-                        <p className="feature-text">
-                            Automatic rejection of lossy formats (JPEG, WebP) and ZIP bundling with instructions to protect hidden data.
-                        </p>
-                    </div>
-
-                    <div className="feature-card">
-                        <div className="feature-icon">📜</div>
-                        <h3 className="feature-title">Compact Smart Contract</h3>
-                        <p className="feature-text">
-                            Record immutable timestamped commitments on the Midnight Network using privacy-first Compact circuits.
-                        </p>
-                    </div>
-
-                    <div className="feature-card">
-                        <div className="feature-icon">🌐</div>
-                        <h3 className="feature-title">Auditable &amp; Open</h3>
-                        <p className="feature-text">
-                            Zero third-party proprietary dependencies in the crypto layer. Clean, reproducible, and verifiable.
-                        </p>
+                    <div className="steps-grid">
+                        {[
+                            {
+                                n: "01", icon: "⚡", title: "Connect 1AM Wallet",
+                                desc: "Authenticate your Midnight identity. Every vault is cryptographically bound to your 1AM Wallet — no other wallet is supported.",
+                            },
+                            {
+                                n: "02", icon: "🔒", title: "Encrypt Locally",
+                                desc: "Your secret is encrypted in-browser with PBKDF2 (100k iterations) + AES-256-GCM. The key never leaves your machine.",
+                            },
+                            {
+                                n: "03", icon: "📜", title: "Commit On-Chain",
+                                desc: "A non-sensitive SHA-256 hash is recorded on the Midnight Compact smart contract. Only the hash — never your secret.",
+                            },
+                            {
+                                n: "04", icon: "🖼️", title: "Hide in Plain Sight",
+                                desc: "The encrypted payload is embedded into the blue-channel LSBs of a lossless PNG — visually identical to the original.",
+                            },
+                        ].map(({ n, icon, title, desc }, i) => (
+                            <article
+                                className="step-card"
+                                key={n}
+                                aria-label={`Step ${n}: ${title}`}
+                                style={{ animationDelay: `${i * 0.07}s` }}
+                            >
+                                <div className="step-num">STEP {n}</div>
+                                <div className="step-icon-wrap" aria-hidden="true">{icon}</div>
+                                <h3 className="step-title">{title}</h3>
+                                <p className="step-description">{desc}</p>
+                            </article>
+                        ))}
                     </div>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="cta-section">
-                <div className="cta-content">
-                    <h2 className="cta-title">Ready to Secure Your Cold Storage?</h2>
-                    <p className="cta-subtitle">
-                        Connect your 1AM Wallet and take control of your seed phrases today.
+            {/* ── Security Layers ── */}
+            <section className="security-section" aria-labelledby="security-heading">
+                <div className="section-inner">
+                    <p className="section-label">
+                        <span className="section-label-line" aria-hidden="true" />
+                        SECURITY MODEL
+                        <span className="section-label-line-r" aria-hidden="true" />
+                    </p>
+                    <h2 className="section-title" id="security-heading">
+                        Three independent security layers
+                    </h2>
+                    <p className="section-subtitle">
+                        Even if one layer is compromised, the others independently protect your secret.
+                    </p>
+
+                    <div className="layers-grid">
+                        {[
+                            {
+                                cls: "layer-1", badge: "LAYER 1", icon: "⚡",
+                                title: "Midnight & 1AM Wallet",
+                                desc: "Zero-knowledge authorization and on-chain vault commitment binding via the Midnight Compact smart contract. Your wallet identity is the key to your vault.",
+                            },
+                            {
+                                cls: "layer-2", badge: "LAYER 2", icon: "🛡️",
+                                title: "AES-256-GCM Encryption",
+                                desc: "PBKDF2 with 100,000 iterations derives a 256-bit AES key from your password. The key and plaintext never leave browser memory.",
+                            },
+                            {
+                                cls: "layer-3", badge: "LAYER 3", icon: "👁️",
+                                title: "PNG LSB Steganography",
+                                desc: "The ciphertext is embedded in the least-significant bits of blue-channel pixels. The vault appears as an ordinary photo for plausible deniability.",
+                            },
+                        ].map(({ cls, badge, icon, title, desc }) => (
+                            <article className={`layer-card ${cls}`} key={title}>
+                                <span className="layer-badge">{badge}</span>
+                                <div className="layer-icon" aria-hidden="true">{icon}</div>
+                                <h3 className="layer-title">{title}</h3>
+                                <p className="layer-desc">{desc}</p>
+                            </article>
+                        ))}
+                    </div>
+
+                    <div className="privacy-note" role="note">
+                        <span className="privacy-note-icon" aria-hidden="true">🔍</span>
+                        <span>
+                            <strong>What goes on-chain:</strong> only a 32-byte vault ID and a SHA-256 ciphertext
+                            commitment. <strong>Passwords, seed phrases, AES keys, and image data never leave your browser</strong> — not to
+                            any server, not to the Midnight Network.
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Why StegoVault ── */}
+            <section className="why-section" aria-labelledby="why-heading">
+                <div className="section-inner">
+                    <p className="section-label">
+                        <span className="section-label-line" aria-hidden="true" />
+                        WHY STEGOVAULT
+                        <span className="section-label-line-r" aria-hidden="true" />
+                    </p>
+                    <h2 className="section-title" id="why-heading">
+                        Built for real security, not theater
+                    </h2>
+                    <p className="section-subtitle">
+                        Every design decision in StegoVault minimizes the attack surface.
+                    </p>
+
+                    <div className="features-grid">
+                        {[
+                            { icon: "🖥️", title: "Zero Server Dependency", text: "Everything runs via the native Web Crypto API in your browser. No backend, no cloud, no data retention." },
+                            { icon: "🔗", title: "Wallet-Bound Vaults", text: "Each vault is cryptographically bound to your 1AM Wallet address. Another wallet cannot decrypt your vault." },
+                            { icon: "📷", title: "Lossless PNG-Only", text: "StegoVault rejects JPEG, WebP, and all lossy formats that would silently corrupt the hidden payload." },
+                            { icon: "📜", title: "Compact Smart Contract", text: "A Midnight-native Compact contract records immutable commitments on Preprod. Auditable and privacy-preserving." },
+                            { icon: "📱", title: "Fully Responsive", text: "Designed for desktop, laptop, tablet, and mobile. Vault management wherever you are." },
+                            { icon: "🌐", title: "Open & Auditable", text: "Zero proprietary crypto dependencies. Web Crypto API only. Every line of code is open for inspection." },
+                        ].map(({ icon, title, text }) => (
+                            <article className="feature-card" key={title}>
+                                <div className="feature-icon-wrap" aria-hidden="true">{icon}</div>
+                                <h3 className="feature-title">{title}</h3>
+                                <p className="feature-text">{text}</p>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* ── Final CTA ── */}
+            <section className="cta-section" aria-labelledby="cta-heading">
+                <div className="cta-section-inner">
+                    <h2 className="cta-section-title" id="cta-heading">
+                        Ready to secure your cold storage?
+                    </h2>
+                    <p className="cta-section-sub">
+                        Connect your 1AM Wallet and create your first steganographic vault.
                         No signups. No trackers. Pure cryptographic security.
                     </p>
-                    {isConnected ? (
-                        <button className="cta-button cta-button-large" onClick={handleLaunch}>
-                            <span className="cta-text">LAUNCH STEGOVAULT</span>
-                            <span className="cta-arrow">→</span>
-                        </button>
-                    ) : (
-                        <button className="cta-button cta-button-large" onClick={handleConnect}>
-                            <span className="wallet-btn-icon">⚡</span>
-                            <span className="cta-text">CONNECT 1AM WALLET</span>
-                        </button>
-                    )}
+                    <div className="cta-btn-wrapper">
+                        {isConnected ? (
+                            <button className="cta-primary-large" onClick={handleLaunch}>
+                                <span aria-hidden="true">🔐</span> Launch StegoVault →
+                            </button>
+                        ) : (
+                            <button className="cta-primary-large" onClick={handleConnect} disabled={isConnecting}>
+                                {isConnecting
+                                    ? <><span className="spinner" /> Connecting…</>
+                                    : <><span aria-hidden="true">⚡</span> Connect 1AM Wallet</>
+                                }
+                            </button>
+                        )}
+                    </div>
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer className="landing-footer">
-                <div className="footer-content">
+            {/* ── Footer ── */}
+            <footer className="landing-footer" role="contentinfo">
+                <div className="landing-footer-inner">
                     <div className="footer-logo">
-                        <svg viewBox="0 0 40 40" className="footer-icon">
-                            <rect x="4" y="4" width="32" height="32" rx="6" stroke="currentColor" strokeWidth="2" fill="none" />
-                            <rect x="10" y="16" width="20" height="14" rx="3" stroke="currentColor" strokeWidth="2" fill="none" />
-                            <circle cx="20" cy="23" r="3" stroke="currentColor" strokeWidth="2" fill="none" />
-                            <path d="M14 16V12a6 6 0 0 1 12 0v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" fill="none" />
-                        </svg>
-                        <span>STEGOVAULT</span>
+                        <span className="footer-logo-icon"><LockIcon /></span>
+                        STEGOVAULT
                     </div>
-                    <p className="footer-text">
-                        Your secrets, your 1AM Wallet, your control.
-                    </p>
+                    <p className="footer-tagline">Your secrets. Your wallet. Your control.</p>
                     <p className="footer-copyright">
-                        © 2026 StegoVault. Open Source. Client-Side Cryptography. Midnight Network &amp; 1AM Wallet Exclusive.
+                        © 2026 StegoVault — MIT License · Midnight Network · 1AM Wallet · Client-Side Only
                     </p>
                 </div>
             </footer>

@@ -15,11 +15,13 @@ StegoVault is a privacy-preserving cold storage Web3 application that allows you
 ## 2. Step-by-Step Guide
 
 ### Phase A: Connecting & Verifying the Smart Contract
-1. Open the StegoVault application at `http://localhost:5173` (or your live demo URL).
+1. Open the StegoVault application at `http://localhost:5173`.
 2. Click **⚡ CONNECT 1AM WALLET** and approve the connection in your 1AM Wallet.
 3. In the **STEGOVAULT CONTRACT** panel:
-   - If a contract is already active, you will see `STATUS: DEPLOYED & VERIFIED` with the Midnight contract address (`0200578f0943ded482a2eb5b575717ab4e88f43c5335bac10f87a28d51536b7d63c4`).
-   - If not yet deployed, click **🚀 DEPLOY STEGOVAULT CONTRACT** and confirm in your 1AM Wallet.
+   - If `VITE_CONTRACT_ADDRESS` is set in your environment, the contract will be shown as already active.
+   - If no contract is configured yet, click **🚀 DEPLOY STEGOVAULT CONTRACT** and confirm in your 1AM Wallet.
+   - You can also click **"or attach existing contract address"** to manually enter a previously deployed address.
+   - Once active, you will see `STATUS: DEPLOYED & VERIFIED` with the Midnight contract address displayed.
 
 ---
 
