@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/payalbabar/moonlight4/actions/workflows/ci.yml/badge.svg)](https://github.com/payalbabar/moonlight4/actions)
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?logo=vercel)](https://moonlight4-dw3y.vercel.app/)
+[![Demo Video](https://img.shields.io/badge/Demo%20Video-YouTube-red?logo=youtube)](https://youtu.be/ie1jfvZB1tg)
 [![Midnight Preprod](https://img.shields.io/badge/Midnight-Preprod-blue)](https://midnight.network)
 [![1AM Wallet](https://img.shields.io/badge/Wallet-1AM%20Wallet-purple)](https://1am.xyz)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -22,6 +23,7 @@ Everything runs 100% in your browser — no servers, no trackers, no data retent
 | Resource | Value / Link |
 | :--- | :--- |
 | **Live Preprod Demo** | [https://moonlight4-dw3y.vercel.app/](https://moonlight4-dw3y.vercel.app/) |
+| **Demo Video (YouTube)** | [https://youtu.be/ie1jfvZB1tg](https://youtu.be/ie1jfvZB1tg) |
 | **Midnight Network** | `Midnight Preprod` |
 | **Contract Address** | `4e9c2ba9d62afedc8c618a2f439d489825cb00692db56b0347357a2f756f5b1b` |
 | **GitHub Repository** | [https://github.com/payalbabar/moonlight4](https://github.com/payalbabar/moonlight4) |
@@ -45,8 +47,8 @@ Everything runs 100% in your browser — no servers, no trackers, no data retent
 | **CI/CD Pipeline** | ✅ | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) · [![CI](https://github.com/payalbabar/moonlight4/actions/workflows/ci.yml/badge.svg)](https://github.com/payalbabar/moonlight4/actions) |
 | **Product X Profile** | ✅ | [@StegoVaultWeb3](https://x.com/StegoVaultWeb3) |
 | **Launch Announcement Post** | ✅ | [View Post on X](https://x.com/StegoVaultWeb3/status/2098807487545942205?s=20) |
-| **Demo Video** | ✅ | [Linked in X post](https://x.com/StegoVaultWeb3/status/2098807487545942205?s=20) |
-| **Minimum 15 Commits** | ✅ | 24+ meaningful commits |
+| **Demo Video** | ✅ | [Watch on YouTube](https://youtu.be/ie1jfvZB1tg) |
+| **Minimum 15 Commits** | ✅ | 25+ meaningful commits |
 
 ---
 

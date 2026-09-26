@@ -1,5 +1,7 @@
 # StegoVault Judge & Reviewer Demo Script
 
+> 📺 **Watch the Walkthrough Demo Video on YouTube:** [https://youtu.be/ie1jfvZB1tg](https://youtu.be/ie1jfvZB1tg)
+
 Follow this step-by-step walkthrough to test and evaluate StegoVault end-to-end.
 
 ---
