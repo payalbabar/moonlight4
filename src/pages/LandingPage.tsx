@@ -32,6 +32,29 @@ export default function LandingPage() {
                         StegoVault
                     </a>
                     <div className="nav-actions">
+                        <a
+                            href="https://x.com/StegoVaultWeb3"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="nav-social-pill"
+                            title="Follow StegoVault on X (Twitter)"
+                            style={{
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: "0.35rem",
+                                padding: "0.35rem 0.75rem",
+                                borderRadius: "9999px",
+                                fontSize: "0.75rem",
+                                fontWeight: 500,
+                                color: "var(--text-secondary, #cbd5e1)",
+                                background: "rgba(255, 255, 255, 0.05)",
+                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                                textDecoration: "none",
+                                transition: "all 0.2s ease"
+                            }}
+                        >
+                            <span style={{ fontWeight: 700, fontSize: "0.8rem" }}>𝕏</span> @StegoVaultWeb3
+                        </a>
                         <span className="nav-network-pill">
                             <span className="nav-dot" aria-hidden="true" />
                             Midnight Preprod
@@ -382,6 +405,25 @@ export default function LandingPage() {
                         STEGOVAULT
                     </div>
                     <p className="footer-tagline">Your secrets. Your wallet. Your control.</p>
+                    <div style={{ display: "flex", justifyContent: "center", gap: "1.25rem", margin: "0.75rem 0", flexWrap: "wrap" }}>
+                        <a
+                            href="https://x.com/StegoVaultWeb3"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: "var(--accent-purple, #a855f7)", textDecoration: "none", fontSize: "0.85rem", fontWeight: 600 }}
+                        >
+                            𝕏 @StegoVaultWeb3
+                        </a>
+                        <span style={{ opacity: 0.3 }}>·</span>
+                        <a
+                            href="https://github.com/payalbabar/moonlight4"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: "var(--text-secondary, #94a3b8)", textDecoration: "none", fontSize: "0.85rem" }}
+                        >
+                            GitHub Repository
+                        </a>
+                    </div>
                     <p className="footer-copyright">
                         © 2026 StegoVault — MIT License · Midnight Network · 1AM Wallet · Client-Side Only
                     </p>

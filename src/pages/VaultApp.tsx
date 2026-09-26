@@ -125,7 +125,14 @@ export default function VaultApp() {
                     <span className="footer-sep">·</span>
                     Midnight Network stores only non-sensitive commitments.
                     <span className="footer-sep">·</span>
-                    Nothing sensitive ever leaves your browser.
+                    <a
+                        href="https://x.com/StegoVaultWeb3"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "var(--accent-purple, #a855f7)", textDecoration: "none" }}
+                    >
+                        𝕏 @StegoVaultWeb3
+                    </a>
                 </p>
             </footer>
 
